@@ -23,7 +23,7 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserServiceImpl userService;
-    private final S3Service s3Service;
+   // private final S3Service s3Service;//
 
     // 모든 게시물 조회
     @Override
@@ -50,7 +50,7 @@ public class PostServiceImpl implements PostService {
 
             String imageUrl = null;
             if (image != null && !image.isEmpty()) {
-                imageUrl = s3Service.uploadFile(image);
+                //imageUrl = s3Service.uploadFile(image);//
             }
             Post post = Post.builder()
                     .user(user)
@@ -79,9 +79,11 @@ public class PostServiceImpl implements PostService {
            }
            if (image != null && !image.isEmpty()) {
                if (post.getImageUrl() != null) {
-                   s3Service.deleteFile(post.getImageUrl());
+                   //s3Service.deleteFile(post.getImageUrl());
+                   //
                }
-               String imageUrl = s3Service.uploadFile(image);
+              // String imageUrl = s3Service.uploadFile(image);//
+               String imageUrl="abc";
                post.update(title, content, imageUrl);
            } else {
                post.update(title, content, post.getImageUrl());
@@ -104,7 +106,7 @@ public class PostServiceImpl implements PostService {
             throw new UnauthorizedException("포스트 삭제 권한이 없는 사용자 입니다.");
         }
         if (post.getImageUrl() != null) {
-            s3Service.deleteFile(post.getImageUrl());
+            //s3Service.deleteFile(post.getImageUrl());//
         }
         postRepository.deleteById(id); // ID로 게시물 삭제
     }
@@ -116,7 +118,7 @@ public class PostServiceImpl implements PostService {
         List<Post> posts = postRepository.findAll();
         for(Post post: posts) {
             if(post.getImageUrl() != null) {
-                s3Service.deleteFile(post.getImageUrl());
+               // s3Service.deleteFile(post.getImageUrl());//
             }
         }
         postRepository.deleteAll();

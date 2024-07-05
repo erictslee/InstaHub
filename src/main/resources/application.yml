@@ -8,9 +8,9 @@ spring:
       max-request-size: 10MB
 
   datasource:
-    url: jdbc:mysql://${DB_HOST}/instahub
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/instahub
+    username: root
+    password: 990326
     driver-class-name: com.mysql.cj.jdbc.Driver
     jpa:
       database-platform: org.hibernate.dialect.MySQLDialect
@@ -32,18 +32,18 @@ jwt:
     token:
       expiration: 1209600000
 
-cloud:
-  aws:
-    s3:
-      bucketName: ${BUCKET_NAME}
-    credentials:
-      accessKey: ${AWS_ACCESS_KEY}
-      secretKey: ${AWS_SECRET_KEY}
-    region:
-      static: ap-northeast-2
-      auto: true
-    stack:
-      auto: true
+#cloud:
+#  aws:
+#    s3:
+#      bucketName: ${BUCKET_NAME}
+#    credentials:
+#      accessKey: ${AWS_ACCESS_KEY}
+#      secretKey: ${AWS_SECRET_KEY}
+#    region:
+#      static: ap-northeast-2
+#      auto: true
+#    stack:
+#      auto: true
 
 server:
   port: 8080
